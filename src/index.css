@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: DM Mono;
+
+    src: url("../src/assets/fonts/DMMono-Regular.ttf")
+}
+
+@theme{
+    --font-dmmono: DM Mono, "sans-serif"
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+    transform: translateX(5px);
+}
