@@ -6,7 +6,7 @@ const memoryGame = () => {
     return storedValue ? Number(storedValue) : Infinity;
   }, []);
 
-  const [gridSize, setGridSize] = useState(2);
+  const [gridSize, setGridSize] = useState(4);
   const [cards, setCards] = useState([]);
   const [flipped, setFlipped] = useState([]);
   const [solved, setSolved] = useState([]);
@@ -31,6 +31,18 @@ const memoryGame = () => {
 
     if (size >= 2 && size <= 8) {
       setGridSize(size);
+    }
+  };
+
+  const gridSizeIncrement = () => {
+    if (gridSize >= 2 && gridSize < 8) {
+      setGridSize(gridSize + 1);
+    }
+  };
+
+  const gridSizeDecrement = () => {
+    if (gridSize > 2 && gridSize <= 8) {
+      setGridSize(gridSize - 1);
     }
   };
 
@@ -106,22 +118,14 @@ const memoryGame = () => {
 
   return (
     <>
-      <div className="bg-green-600 flex flex-row justify-around items-center text-white font-dmmono py-4 font-bold">
+      <div className="bg-green-600 flex flex-row justify-around items-center text-white font-dmmono py-4 font-bold flex-wrap gap-2">
         <div className="text-2xl">Memory Tiles</div>
-        <div className="flex flex-row justify-around items-center gap-[25px]">
-          <div>
-          <label htmlFor="gridSize" className="mr-2 font-bold text-white">
-            Grid Size:(max 8)
-          </label>
-          <input
-            type="number"
-            id="gridSize"
-            min="2"
-            max="8"
-            value={gridSize}
-            onChange={handleGridSizeChange}
-            className="border-2 border-gray-300 rounded px-2 py-1 text-white"
-          /></div>
+        <div className="flex flex-row justify-center items-center gap-[10px] flex-wrap">
+          <div className="flex row gap-3">
+            <div className="border rounded py-1 px-3 bg-white text-black cursor-pointer" onClick={gridSizeDecrement}>-</div>
+            <div className="border rounded px-3 py-1">{gridSize}</div>
+            <div className="border rounded py-1 px-3 bg-white text-black cursor-pointer" onClick={gridSizeIncrement}>+</div>
+          </div>
           <div className="bg-white text-black px-3 py-1 rounded-[5px]">
             Moves: {moves}
           </div>
@@ -132,7 +136,7 @@ const memoryGame = () => {
         </div>
       </div>
 
-      <div className="min-h-screen bg-[#091224]">
+      <div className="min-h-screen bg-[#091224] pb-5">
         <div className="min-h-screen font-dmmono flex flex-col items-center justify-center bg-grey-100">
           <div className="mb-4"></div>
 
@@ -140,7 +144,8 @@ const memoryGame = () => {
             className={`grid gap-2 mb-1`}
             style={{
               gridTemplateColumns: `repeat(${gridSize}, minmax(0,1fr))`,
-              width: `min(100%, ${gridSize * 5.5}rem)`,
+              width: `min(100%, ${Math.min(gridSize * 5.5, 90)}rem)`, // Reduced max width
+              maxWidth: '90vw' //Added max width to be 90% of viewport width
             }}
           >
             {cards.map((card) => (
