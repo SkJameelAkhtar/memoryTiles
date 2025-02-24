@@ -122,16 +122,16 @@ const memoryGame = () => {
         <div className="text-2xl">Memory Tiles</div>
         <div className="flex flex-row justify-center items-center gap-[10px] flex-wrap">
           <div className="flex row gap-3">
-            <div className="border rounded py-1 px-3 bg-white text-black cursor-pointer" onClick={gridSizeDecrement}>-</div>
+            <div className="rounded-[5px] py-1 px-3 bg-white text-black cursor-pointer flex justify-center items-center" onClick={gridSizeDecrement}>-</div>
             <div className="border rounded px-3 py-1">{gridSize}</div>
-            <div className="border rounded py-1 px-3 bg-white text-black cursor-pointer" onClick={gridSizeIncrement}>+</div>
+            <div className="rounded-[5px] py-1 px-3 bg-white text-black cursor-pointer flex justify-center items-center" onClick={gridSizeIncrement}>+</div>
           </div>
           <div className="bg-white text-black px-3 py-1 rounded-[5px]">
             Moves: {moves}
           </div>
           <div className="bg-white text-black px-3 py-1 rounded-[5px]">
-            Best Move Count:{" "}
-            {bestMovesCount === Infinity ? "N/A" : bestMovesCount}
+            Best:{" "}
+            {bestMovesCount === Infinity ? "N/A" : bestMovesCount} Moves
           </div>
         </div>
       </div>
